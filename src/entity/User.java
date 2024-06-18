@@ -1,16 +1,18 @@
+package entity;
+
 import java.time.LocalDate;
 
 public class User {
 
-    private long userId;
-    private String userName;
+    private Long userId;
+    private String username;
     private String password;
     private String email;
     private LocalDate createdAt;
 
-    public User(long userId, String userName, String password, String email, LocalDate createdAt) {
+    public User(Long userId, String username, String password, String email, LocalDate createdAt) {
         setUserId(userId);
-        setUserName(userName);
+        setUsername(username);
         setPassword(password);
         setEmail(email);
         setCreatedAt(createdAt);
@@ -19,22 +21,22 @@ public class User {
     public User() {
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) /*throw*/{
-        if(this.userId);
+    public void setUserId(Long userId) /*throw*/{
+        if(this.userId == 0);
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) /*throw*/{
-        if(this.userName);
-        this.userName = userName;
+    public void setUsername(String username) /*throw*/{
+        if(this.username == null);
+        this.username = username;
     }
 
     public String getPassword() {
@@ -42,7 +44,7 @@ public class User {
     }
 
     public void setPassword(String password) /*throw*/{
-        if(this.password);
+        if(this.password == null);
         this.password = password;
     }
 
@@ -51,7 +53,7 @@ public class User {
     }
 
     public void setEmail(String email) /*throw*/{
-        if(this.email);
+        if(this.email == null);
         this.email = email;
     }
 
@@ -60,7 +62,7 @@ public class User {
     }
 
     public void setCreatedAt(LocalDate createdAt) /*throw*/{
-        if(this.createdAt);
+        if(this.createdAt == null);
         this.createdAt = createdAt;
     }
 
