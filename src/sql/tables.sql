@@ -1,12 +1,12 @@
-DROP TABLE IF EXISTS ChatParticipants;
-DROP TABLE IF EXISTS Contacts;
-DROP TABLE IF EXISTS Files;
-DROP TABLE IF EXISTS Messages;
-DROP TABLE IF EXISTS Chats;
-DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS chatParticipants;
+DROP TABLE IF EXISTS contacts;
+DROP TABLE IF EXISTS files;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS chats;
+DROP TABLE IF EXISTS users;
 
 -- Таблица пользователей
-CREATE TABLE Users (
+CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE Users (
 );
 
 -- Таблица чатов
-CREATE TABLE Chats (
+CREATE TABLE chats (
     chat_id SERIAL PRIMARY KEY,
     chat_name VARCHAR(100),
     is_group BOOLEAN DEFAULT FALSE,
@@ -23,7 +23,7 @@ CREATE TABLE Chats (
 );
 
 -- Таблица участников чатов
-CREATE TABLE ChatParticipants (
+CREATE TABLE chatParticipants (
     chat_id INT REFERENCES Chats(chat_id) ON DELETE CASCADE,
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     role VARCHAR(20) DEFAULT 'member',
@@ -32,7 +32,7 @@ CREATE TABLE ChatParticipants (
 );
 
 -- Таблица сообщений
-CREATE TABLE Messages (
+CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
     chat_id INT REFERENCES Chats(chat_id) ON DELETE CASCADE,
     sender_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
@@ -41,7 +41,7 @@ CREATE TABLE Messages (
 );
 
 -- Таблица контактов
-CREATE TABLE Contacts (
+CREATE TABLE contacts (
     user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     contact_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -49,7 +49,7 @@ CREATE TABLE Contacts (
 );
 
 -- Таблица файлов
-CREATE TABLE Files (
+CREATE TABLE files (
     file_id SERIAL PRIMARY KEY,
     message_id INT REFERENCES Messages(message_id) ON DELETE CASCADE,
     file_path VARCHAR(255) NOT NULL,

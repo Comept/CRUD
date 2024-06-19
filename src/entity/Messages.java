@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 public class Messages {
@@ -7,12 +8,12 @@ public class Messages {
     private long chatId;
     private long senderId;
     private String messageText;
-    private LocalDate sentAt;
+    private Time sentAt;
 
     public Messages() {
     }
 
-    public Messages(long messageId, long chatId, long senderId, String messageText, LocalDate sentAt) {
+    public Messages(long messageId, long chatId, long senderId, String messageText, Time sentAt) {
         setMessageId(messageId);
         setChatId(chatId);
         setSenderId(senderId);
@@ -52,11 +53,11 @@ public class Messages {
         this.messageText = messageText;
     }
 
-    public LocalDate getSentAt() {
+    public Time getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(LocalDate sentAt) {
+    public void setSentAt(Time sentAt) {
         this.sentAt = sentAt;
     }
 }
