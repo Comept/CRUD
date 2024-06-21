@@ -21,6 +21,12 @@ public class Messages {
         setSentAt(sentAt);
     }
 
+    public Messages(long chatId, long senderId, String messageText) {
+        setChatId(chatId);
+        setSenderId(senderId);
+        setMessageText(messageText);
+    }
+
     public long getMessageId() {
         return messageId;
     }

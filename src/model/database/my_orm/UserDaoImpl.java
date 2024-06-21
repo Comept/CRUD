@@ -1,6 +1,7 @@
 package model.database.my_orm;
 
 import entity.User;
+import exception.DaoException;
 import model.database.ConnectionBuilder;
 import model.database.UserDao;
 
@@ -18,21 +19,23 @@ public class UserDaoImpl implements UserDao {
     private static Connection getConnectiont() throws SQLException {
         return ConnectionBuilder.getConnection();
     }
-    public String findUserPassword(String email) {
+
+    public String findUserPassword(String email) throws DaoException {
         String password = null;
         try (Connection con = getConnectiont();
-                PreparedStatement preparedStatement = con.prepareStatement(FIND_PASSWORD)) {
+             PreparedStatement preparedStatement = con.prepareStatement(FIND_PASSWORD)) {
             preparedStatement.setString(1,email);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
                 password = rs.getString(1);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException sqlException) {
+            throw new DaoException(sqlException);
         }
         return password;
     }
-    public Long findUserIdByEmail(String email){
+
+    public Long findUserIdByEmail(String email) throws DaoException {
         long id = 0;
         try (Connection con = getConnectiont();
              PreparedStatement preparedStatement = con.prepareStatement(FIND_ID_BY_EMAIL)) {
@@ -41,12 +44,13 @@ public class UserDaoImpl implements UserDao {
             while (rs.next()){
                 id = rs.getLong(1);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException sqlException) {
+            throw new DaoException(sqlException);
         }
         return id;
     }
-    public Long findUserIdByUsername(String username){
+
+    public Long findUserIdByUsername(String username) throws DaoException {
         long id = 0;
         try (Connection con = getConnectiont();
              PreparedStatement preparedStatement = con.prepareStatement(FIND_ID_BY_USERNAME)) {
@@ -55,20 +59,22 @@ public class UserDaoImpl implements UserDao {
             while (rs.next()){
                 id = rs.getLong(1);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException sqlException) {
+            throw new DaoException(sqlException);
         }
         return id;
     }
-    public void addUser(User user){
+
+    public void addUser(User user) throws DaoException {
+        if (user == null) throw new DaoException("User is NULL");
         try (Connection con = getConnectiont();
              PreparedStatement preparedStatement = con.prepareStatement(ADD_USSER)) {
             preparedStatement.setString(1,user.getUsername());
             preparedStatement.setString(2,user.getPassword());
             preparedStatement.setString(3,user.getEmail());
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException sqlException) {
+            throw new DaoException(sqlException);
         }
     }
 }

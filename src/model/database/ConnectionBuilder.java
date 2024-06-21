@@ -9,7 +9,7 @@ public class ConnectionBuilder {
         Connection con = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/messenger",
                 "postgres",
-                "");
+                "postgres");
         return con;
     }
 }

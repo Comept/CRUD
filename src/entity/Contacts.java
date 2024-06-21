@@ -10,10 +10,9 @@ public class Contacts {
     public Contacts() {
     }
 
-    public Contacts(long userId, long contactId, LocalDate createdAt) {
+    public Contacts(long userId, long contactId) {
         setUserId(userId);
         setContactId(contactId);
-        setCreatedAt(createdAt);
     }
 
     public long getUserId() {

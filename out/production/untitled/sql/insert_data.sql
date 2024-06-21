@@ -21,7 +21,7 @@ INSERT INTO messages (chat_id, sender_id, message_text) VALUES
     (1,1, 'qweqeqwe'),
     (1,2, 'cxv'),
     (1,1, 'qweqeqwe'),
-    (1,2, 'regregergerg'),
+    (1,2, 'regregergerg');
 
 INSERT INTO contacts (user_id, contact_id) VALUES
     (1, 2),
