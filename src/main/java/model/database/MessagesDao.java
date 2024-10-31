@@ -7,8 +7,9 @@ import exception.DaoException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface MessagesDao {
-    ArrayList<Message> findAllMessages(User chat) throws DaoException;
-    void addMessage(Chat chat, User sender, String messageText) throws DaoException;
+    List<Message> findAllMessages(Chat chat) throws DaoException;
+    void saveMessage(Message message) throws DaoException;
 }

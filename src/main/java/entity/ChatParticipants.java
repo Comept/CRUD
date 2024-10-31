@@ -1,6 +1,7 @@
 package entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class ChatParticipants implements Serializable {
     @ManyToOne
     private Chat chat;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     private String role;
