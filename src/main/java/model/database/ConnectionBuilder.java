@@ -1,15 +1,13 @@
 package model.database;
 
 import entity.*;
-import lombok.Getter;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.cfg.Environment;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionBuilder {
 
@@ -18,15 +16,19 @@ public class ConnectionBuilder {
     private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration();
-            configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-            configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://LOCAL/messenger4CRUDApp");
-            configuration.setProperty("hibernate.connection.username", "postgres");
-            configuration.setProperty("hibernate.connection.password","postgres");
 
-            configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-            configuration.setProperty("hibernate.show_sql", "true");
-            configuration.setProperty("hibernate.format_sql", "true");
-            configuration.setProperty("hibernate.hbm2ddl.auto", "update");
+            Properties settings = new Properties();
+            settings.put(Environment.DRIVER, "org.postgresql.Driver");
+            settings.put(Environment.URL, "jdbc:postgresql://localhost/messenger4CRUDApp");
+            settings.put(Environment.USER, "postgres");
+            settings.put(Environment.PASS,"postgres");
+
+            settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+            settings.put(Environment.SHOW_SQL, "true");
+            settings.put(Environment.FORMAT_SQL, "true");
+            settings.put(Environment.HBM2DDL_AUTO, "update");
+
+            configuration.setProperties(settings);
 
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(Contacts.class);
