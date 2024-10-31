@@ -1,6 +1,7 @@
 package model.database;
 
 import entity.*;
+import lombok.Setter;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -10,7 +11,7 @@ import org.hibernate.cfg.Environment;
 import java.util.Properties;
 
 public class ConnectionBuilder {
-
+    @Setter
     private static SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {

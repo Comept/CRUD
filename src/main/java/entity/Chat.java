@@ -24,7 +24,7 @@ public class Chat {
     private boolean isGroup;
 
     @Builder.Default
-    @OneToMany(mappedBy = "chat")
+    @OneToMany(mappedBy = "chat",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ChatParticipants> chatParticipants = new ArrayList();
 
     @Builder.Default
