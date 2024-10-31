@@ -1,52 +1,39 @@
 package entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.UUID;
 
-public class ChatParticipants {
-    private long chatId;
-    private long userId;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class ChatParticipants implements Serializable {
+    private static final long serialVersionUID = 5422110446816052268L;
+    @Id
+    private UUID id;
+
+    @ManyToOne
+    private Chat chat;
+
+    @ManyToOne
+    private User user;
+
     private String role;
-    private LocalDate joinedAt;
+    private Date joinedAt;
 
-    public ChatParticipants() {
-    }
-
-    public ChatParticipants(long chatId, long userId, String role, LocalDate joinedAt) {
-        setChatId(chatId);
-        setUserId(userId);
-        setRole(role);
-        setJoinedAt(joinedAt);
-    }
-
-    public long getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(long chatId) {
-        this.chatId = chatId;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public LocalDate getJoinedAt() {
-        return joinedAt;
-    }
-
-    public void setJoinedAt(LocalDate joinedAt) {
-        this.joinedAt = joinedAt;
+    public ChatParticipants(UUID id) {
+        super();
+        this.id = id;
     }
 }

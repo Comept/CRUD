@@ -1,15 +1,26 @@
 package model.database;
 
+import lombok.Getter;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionBuilder {
-    public static Connection getConnection() throws SQLException {
-        Connection con = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/messenger",
-                "postgres",
-                "postgres");
-        return con;
+    @Getter
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        try {
+            return new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static void shutdown() {
+        getSessionFactory().close();
     }
 }

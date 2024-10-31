@@ -1,41 +1,32 @@
 package entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.UUID;
 
-public class Contacts {
-    private long userId;
-    private long contactId;
-    private LocalDate createdAt;
-
-    public Contacts() {
-    }
-
-    public Contacts(long userId, long contactId) {
-        setUserId(userId);
-        setContactId(contactId);
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getContactId() {
-        return contactId;
-    }
-
-    public void setContactId(long contactId) {
-        this.contactId = contactId;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class Contacts implements Serializable {
+    private static final long serialVersionUID = -1662860013574355705L;
+    @Id
+    @Basic(optional = false)
+    @Column(unique=true, nullable = false)
+    private UUID id;
+    @ManyToOne
+    @JoinColumn(name = "user1_id", insertable = false, updatable = false)
+    private User user1Id;
+    @ManyToOne
+    @JoinColumn(name = "user2_id", insertable = false, updatable = false)
+    private User user2Id;
+    private Date createdAt;
 }

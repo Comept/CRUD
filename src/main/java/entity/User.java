@@ -1,69 +1,68 @@
 package entity;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class User {
+import java.io.Serial;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
-    private Long userId;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor()
+@Builder
+@Entity
+@Table(name="users")
+public class User implements Serializable{
+
+    @Serial
+    private static final long serialVersionUID = -6462501874197322250L;
+    @Id
+    @Basic(optional = false)
+    @Column(unique=true, nullable = false)
+    private UUID id;
+    @Column(unique=true, nullable = false)
     private String username;
-    private String password;
+    @Column(unique=true, nullable = false)
     private String email;
-    private LocalDate createdAt;
+    @Builder.Default
+    private List<String> grantedAuthority = new ArrayList<String>(List.of("USER_ROLE"));
+    @Builder.Default
+    private Date createdAt = new Date();
 
-    public User(Long userId, String username, String password, String email, LocalDate createdAt) {
-        setUserId(userId);
-        setUsername(username);
-        setPassword(password);
-        setEmail(email);
-        setCreatedAt(createdAt);
+    @Builder.Default
+    @OneToMany(mappedBy="user")
+    private List<ChatParticipants> userChats = new ArrayList<ChatParticipants>();
+
+    @Builder.Default
+    @OneToMany(mappedBy="user1Id")
+    private List<Contacts> contacts = new ArrayList<Contacts>();
+
+    public User(UUID id) {
+        super();
+        this.id = id;
     }
 
-    public User() {
+    public void addGrantedAuthority(String grantedAuthority) {
+        if(!this.grantedAuthority.contains(grantedAuthority))
+            this.grantedAuthority.add(grantedAuthority);
     }
-
-    public Long getUserId() {
-        return userId;
+    public void deleteGrantedAuthority(String grantedAuthority) {
+        this.grantedAuthority.remove(grantedAuthority);
     }
-
-    public void setUserId(Long userId) /*throw*/{
-        if(this.userId == 0);
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) /*throw*/{
-        if(this.username == null);
+    public User(UUID id, String username, String email, Date createdAt) {
+        super();
+        this.id = id;
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) /*throw*/{
-        if(this.password == null);
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) /*throw*/{
-        if(this.email == null);
         this.email = email;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) /*throw*/{
-        if(this.createdAt == null);
         this.createdAt = createdAt;
     }
-
 }

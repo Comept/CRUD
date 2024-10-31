@@ -1,6 +1,6 @@
 package model.database;
 
-import entity.Messages;
+
 import exception.DaoException;
 
 import java.sql.SQLException;

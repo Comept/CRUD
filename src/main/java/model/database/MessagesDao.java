@@ -1,12 +1,14 @@
 package model.database;
 
-import entity.Messages;
+import entity.Chat;
+import entity.Message;
+import entity.User;
 import exception.DaoException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface MessagesDao {
-    ArrayList<Messages> findAllMessages(long chatId) throws DaoException;
-    void addMessage(long chatId, long sendId, String messageText) throws DaoException;
+    ArrayList<Message> findAllMessages(User chat) throws DaoException;
+    void addMessage(Chat chat, User sender, String messageText) throws DaoException;
 }
