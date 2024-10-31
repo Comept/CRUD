@@ -19,7 +19,7 @@ public class ConnectionBuilder {
         try {
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-            configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://LOCAL/messenger");
+            configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://LOCAL/messenger4CRUDApp");
             configuration.setProperty("hibernate.connection.username", "postgres");
             configuration.setProperty("hibernate.connection.password","postgres");
 

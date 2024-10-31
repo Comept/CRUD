@@ -40,7 +40,7 @@ public class User implements Serializable{
 
     @Builder.Default
     @OneToMany(mappedBy="user")
-    private List<ChatParticipants> userChats = new ArrayList<ChatParticipants>();
+    private List<ChatParticipants> chats = new ArrayList<ChatParticipants>();
 
     @Builder.Default
     @OneToMany(mappedBy="user1Id")
