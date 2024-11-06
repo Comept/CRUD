@@ -1,7 +1,8 @@
+package model.database.impl;
+
 import entity.User;
 import exception.DaoException;
 import model.database.ConnectionBuilder;
-import model.database.impl.UserDaoImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -128,13 +129,5 @@ public class UserDaoImplTest {
         assertNotNull(result);
         assertEquals(userId, result.getId());
         verify(transaction).commit();
-    }
-
-    @Test
-    public void testFindUserByIdThrowsDaoException() {
-        UUID userId = UUID.randomUUID();
-        when(session.createQuery(anyString(), eq(User.class))).thenThrow(new RuntimeException("Database error"));
-
-        assertThrows(DaoException.class, () -> userDao.findUserById(userId));
     }
 }

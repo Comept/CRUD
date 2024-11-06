@@ -12,7 +12,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             UserDaoImpl repo = new UserDaoImpl();
-            repo.saveUser(new User(UUID.randomUUID(), "EWWED","FWEFFE",new Date()));
+            repo.saveUser(new User(UUID.randomUUID(), UUID.randomUUID().toString(),UUID.randomUUID().toString(),new Date()));
+
         } catch (DaoException e) {
             System.out.printf(e.getMessage());
         }

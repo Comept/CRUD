@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.UUID;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -28,7 +26,7 @@ public class User implements Serializable{
     @Id
     @Basic(optional = false)
     @Column(unique=true, nullable = false)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @Column(unique=true, nullable = false)
     private String username;
     @Column(unique=true, nullable = false)
